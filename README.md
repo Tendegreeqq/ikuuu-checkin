@@ -150,16 +150,22 @@ python get_cookie.py ikuuu.pw   # 换域名
 
 支持连续登录多个账号，逐个收集。这个工具只在本地用，不要放青龙里跑。
 
-## GitHub Actions
+## GitHub Actions（默认关闭）
 
-仓库自带 `.github/workflows/checkin.yml`，每天北京时间 08:30 自动跑。
+仓库里带了 `.github/workflows/checkin.yml`，**但它默认是禁用状态**，不会自己跑。
 
-1. Fork 或直接用本仓库
+想用 GitHub 代替青龙的话，按顺序做：
+
+1. **先把仓库改成 private**（`Settings` → 最下方 `Change repository visibility`）。
+   公开仓库的 Actions 日志对所有人可见，签到时间、账号数、流量数额都会暴露
 2. `Settings` → `Secrets and variables` → `Actions` → `New repository secret`
-3. Name 填 `IKUUU_COOKIE`，Value 填你的 cookie（多账号换行）
-4. `Actions` 页面手动触发一次验证
+3. Name 填 `IKUUU_COOKIE`，Value 填完整 cookie（多账号换行）
+4. `Actions` 页面 → 左侧 `iKuuu Checkin` → `Enable workflow`
+5. 点 `Run workflow` 手动触发一次，确认能跑通
 
-> 公开仓库里 cookie 放在 Secrets 中是加密的，不会暴露。但请注意 GitHub 的 Actions 日志对公开仓库是公开可见的，本脚本已对 cookie 做脱敏处理。
+如果只是用青龙，就让它保持禁用 —— 别启用又忘了配 secret，那样每天都会失败并给你发邮件。
+
+> private 仓库的 Actions 每月有 2000 分钟免费额度，这个任务单次不到 1 分钟，够用很久。
 
 ## 常见问题
 
